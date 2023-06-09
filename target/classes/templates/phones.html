@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Students</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h1>List Phones</h1>
+		</div>
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th>ID</th>
+					<th>name</th>
+					<th>price</th>
+					<th>brand</th>
+					<th>SOLD</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="student: ${students}">
+					<td th:text="${student.id}"></td>
+					<td th:text="${student.name}"></td>
+					<td th:text="${student.price}"></td>
+					<td th:text="${student.brand}"></td>
+					<td><input type="checkbox" th:checked="${student.sold}" disabled="disabled" /></td>
+					<td style="display: flex;width: 25px">
+						<a th:href="@{phone/{id}(id = ${student.id})}"
+						class="btn btn-success">View</a>
+						<form th:action="@{phone/delete/{id}(id = ${student.id})}" th:method="DELETE" th:object="${student}">
+						<button class="btn btn-danger">Delete</button></td>
+						</form>
+				</tr>
+			</tbody>
+		</table>
+		<a th:href="@{phone/{id}(id = -1)}" class="btn btn-success col-lg-12">New
+			Phone</a>
+	</div>
+</body>
+</html>
